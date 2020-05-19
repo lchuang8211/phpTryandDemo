@@ -1,0 +1,197 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HTML 5 新規格</title>
+        <style type="text/css">
+            .meter1{ /* 長條圖 */
+                width: 250px;
+                height: 30px;
+            }
+            .canvas1{ /* 畫布 */
+                border:3px solid #ff9900;
+            }
+        </style>
+        <script>
+            var salesData=[[150 , 300], [250 , 150], [350 ,400 ], [ 450,250 ]];
+            function drawOnCanvas(){
+                var canvas = document.getElementById("myCanvas");  //第一步驟 指定對象
+                if(canvas.getContext){ // 偵測此方法存在的做法
+                    var ctx = canvas.getContext("2d");
+                    //畫矩形
+                    ctx.beginPath();
+                    ctx.fillStyle = "#5AA0FF";
+                    ctx.strokeStyle = "#F02F10";
+                    ctx.lineWidth = 10;
+                    ctx.fillRect(150,20,400,50); // rect(起點x, 起點y, 矩形寬w, 矩形長h)
+                    ctx.strokeRect(150,40,400,50);
+                    //圓形
+                    ctx.beginPath();
+                    ctx.strokeStyle = "#33FF33";
+                    ctx.fillStyle = "#33FF33";
+                    ctx.lineWidth = 10;
+                    ctx.arc(250,150,50,0.75*Math.PI,1.25*Math.PI); // arc(圓心x,圓心y,半徑r,ds起始角度,de結束角度) 順時鐘轉
+                    ctx.lineTo(250,150);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.strokeStyle = "#33CF83";
+                    ctx.fillStyle = "#33CF83";
+                    ctx.arc(250,150,50,1.25*Math.PI,0.75*Math.PI); // arc(圓心x,圓心y,半徑r,ds起始角度,de結束角度) 順時鐘轉
+                    ctx.lineTo(250,150);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fill();
+
+                    ctx.font = "bold italic 微軟正黑體";
+                    ctx.fillStyle = "#111111";
+                    ctx.fillText("75%",275,150);
+                    ctx.font = "bold italic 微軟正黑體";
+                    ctx.fillStyle = "#111111";    
+                    ctx.fillText("25%",200,150);
+                    ctx.font = "bold italic 微軟正黑體";                    
+                    ctx.fillStyle = "#111111";    
+                    ctx.fillText("市佔率",240,220); 
+
+                    //折線圖
+                    ctx.beginPath();
+                    //坐標軸
+                    ctx.moveTo(100,100);
+                    ctx.lineTo(100,500);
+                    ctx.lineTo(500,500);
+                    ctx.strokeStyle = "#33CF83";
+                    ctx.lineWidth = 5;
+                    ctx.stroke();
+                    //座標文字
+                    ctx.font = "bold italic 20pt 微軟正黑體";
+                    ctx.fillStyle="#339933";
+                    ctx.fillText("業績",35,100);
+                    ctx.fillText("日期",505,505);
+                    //資料折線圖
+                    ctx.beginPath();
+                    for(var i = 0; i<salesData.length ; i++ ){
+                        if(i==0) ctx.moveTo(salesData[0][0],salesData[0][1]);
+                        else ctx.lineTo(salesData[i][0],salesData[i][1]);
+                    }
+                    ctx.strokeStyle="#515551";
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+
+                }                
+            }
+            function getLocation(){
+                var mylabel=document.getElementById("lblGPSInfo");
+                if(navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                }else{
+                    mylabel.innerHTML="瀏覽器不支援GPS定位";
+                }
+            }
+            function showPosition(position){  //callback function like a object
+                var mylabel=document.getElementById("lblGPSInfo");
+                mylabel.innerHTML ="(緯度,經度): ("+position.coords.latitude +","+ position.coords.longitude+")";
+            }
+        </script>
+    </head>
+    <body onload="drawOnCanvas()">
+        語意結構-拆三部分 <br>
+        語意標籤: header main footer
+        <hr>
+        <header>
+            <nav>
+                <ul>
+                    <li>首頁</li>
+                    <li>基本資料</li>
+                    <li>作品</li>
+                    <li>大事記</li>
+                </ul>
+            </nav>
+            <hgroup>
+                <h1> HTML5 新功能 </h1>
+                <h1> HTML5 DEMO </h1>
+            </hgroup>
+        </header>
+        <main>
+            <article> <!-- 可以多個 -->
+                <header> <!-- 標題 -->
+                    <h3>HTML 介紹</h3>
+                </header>
+                <section> <!-- 內容 -->
+                    HTML5[註 1]是HTML最新的修訂版本，由全球資訊網協會（W3C）於2014年10
+                    月完成標準制定[2][4]。目標是取代1999年所制定的HTML 4.01和
+                    XHTML 1.0標準，以期能在網際網路應用迅速發展的時候，
+                    使網路標準達到符合當代的網路需求。廣義論及HTML5
+                    時，實際指的是包括HTML、CSS和JavaScript在內的一套
+                    技術組合。它希望能夠減少網頁瀏覽器對於需要外掛程式的豐富
+                    性網路應用服務（Plug-in-Based Rich Internet Application，RIA），
+                    例如：Adobe Flash、Microsoft Silverlight與Oracle JavaFX的需求，
+                    並且提供更多能有效加強網路應用的標準集。
+                </section>
+                <figure> <!-- 圖 -->
+                    <img src="icon/HTML5_logo.png" width="200px" alt="imgicon">
+                </figure>
+                <figcaption><!-- 圖的描述 -->
+                    <a href="https://zh.wikipedia.org/wiki/HTML5">fhrsd</a>
+                </figcaption>
+            </article>
+            <article>
+                <section>
+                    <details>
+                        <summary> html 5 介紹 </summary>
+                        5456421
+                        SDFSHFG
+                    </details>
+                </section>
+            </article>
+
+            <article>
+                <section>
+                    HTML 5 多媒體 影片檔 mp4/h.264
+                </section>
+                <aside>
+                    <video href="https://www.youtube.com/watch?v=cHWwTDk9ytQ" width="480" height="320" controls autoplay muted>
+                    <!-- YOUTUBE 不可外連 只能內嵌 -->
+                </aside>
+            </article>
+
+            <article>
+                <section>HTML 5 多媒體 聲音檔 mp3 wav acc </section>
+                <aside>
+                    <audio src="" controls autoplay >
+                </aside>
+            </article>
+            
+            <article>
+                <section>HTML 5 長條圖</section>
+                <figure>
+                    <p>國文 <meter min="0" max="100" value="80" class="meter1">80</meter></p>
+                    <p>英文 <meter min="0" max="100" value="70" class="meter1">70</meter></p>
+                    <p>數學 <meter min="0" max="100" value="60" class="meter1">60</meter></p>
+                    <p>自然 <meter min="0" max="100" value="50" class="meter1">50</meter></p>
+                    <p>社會 <meter min="0" max="100" value="40" class="meter1">40</meter></p>
+                </figure>
+            </article>
+
+            <article>
+                <section>HTML 5 繪圖功能</section>
+                <aside>
+                    <canvas width="600" height="600" class="canvas1" id="myCanvas"></canvas>
+                </aside>
+            </article>
+
+            <article>   <!-- GPS定位練習/手機向 -->
+                <section> GPS定位測試 </section>
+                <Label id = "lblGPSInfo">GPS 位置 : </Label>
+                <button onclick="getLocation()">取得GPS位置</button>
+            </article>
+
+        </main>
+
+        <footer>
+
+        </footer>
+
+    </body>
+
+</html>
